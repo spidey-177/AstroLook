@@ -1,9 +1,6 @@
 <!doctype html>
 <html lang="es">
   <head>
-    <base
-      href="https://d16ilfvy4mv02r.cloudfront.net/workspaces/1q3IC4Tpch29xbnDAUcgTci75MNjmQL5/f5e8847f-41cf-44a7-95d8-bfcec1682485/files/"
-    />
     <meta charset="UTF-8" />
     <meta
       name="viewport"
@@ -52,6 +49,7 @@
               "fade-in": "fadeIn 0.4s ease-out forwards",
               "card-in": "cardIn 0.6s cubic-bezier(0.16,1,0.3,1) forwards",
               shimmer: "shimmer 1.5s infinite",
+              "pop-in": "popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards",
             },
             keyframes: {
               pulseGlow: {
@@ -85,7 +83,11 @@
               },
               shimmer: {
                 "0%": { backgroundPosition: "-200% center" },
-                "100%": { backgroundPosition: "200% center" },
+                "100%": { backgroundPosition: " 200% center" },
+              },
+              popIn: {
+                from: { opacity: "0", transform: "scale(0.82)" },
+                to: { opacity: "1", transform: "scale(1)" },
               },
             },
           },
@@ -103,7 +105,6 @@
         overflow-x: hidden;
       }
 
-      /* Stars background */
       .stars-bg {
         position: fixed;
         inset: 0;
@@ -131,8 +132,6 @@
           transform: scale(1.5);
         }
       }
-
-      /* Gradient mesh background */
       .mesh-bg {
         position: fixed;
         inset: 0;
@@ -156,7 +155,7 @@
           );
       }
 
-      /* Glow button */
+      /* Glow button variants */
       .btn-glow {
         background: linear-gradient(135deg, #4f8ef7, #a855f7);
         box-shadow:
@@ -164,15 +163,30 @@
           0 0 60px rgba(168, 85, 247, 0.3);
         transition: all 0.3s ease;
       }
-      .btn-glow:hover,
-      .btn-glow:active {
-        box-shadow:
-          0 0 50px rgba(79, 142, 247, 0.8),
-          0 0 100px rgba(168, 85, 247, 0.5);
-        transform: scale(1.02);
-      }
       .btn-glow:active {
         transform: scale(0.97);
+      }
+
+      .btn-glow-blue {
+        background: linear-gradient(135deg, #4f8ef7, #2563eb);
+        box-shadow:
+          0 0 22px rgba(79, 142, 247, 0.6),
+          0 0 44px rgba(79, 142, 247, 0.2);
+        transition: all 0.25s ease;
+      }
+      .btn-glow-blue:active {
+        transform: scale(0.96);
+      }
+
+      .btn-glow-purple {
+        background: linear-gradient(135deg, #a855f7, #7c3aed);
+        box-shadow:
+          0 0 22px rgba(168, 85, 247, 0.6),
+          0 0 44px rgba(168, 85, 247, 0.2);
+        transition: all 0.25s ease;
+      }
+      .btn-glow-purple:active {
+        transform: scale(0.96);
       }
 
       /* Card gradient border */
@@ -196,7 +210,7 @@
         );
       }
 
-      /* Spinner ring */
+      /* Spinner */
       .spinner-ring {
         width: 64px;
         height: 64px;
@@ -228,15 +242,11 @@
         background-clip: text;
         animation: shimmer 3s linear infinite;
       }
-
-      /* Neon text */
       .neon-text {
         text-shadow:
           0 0 10px rgba(79, 142, 247, 0.8),
           0 0 20px rgba(168, 85, 247, 0.5);
       }
-
-      /* Tag gradient */
       .tag-gradient {
         background: linear-gradient(
           135deg,
@@ -245,13 +255,9 @@
         );
         border: 1px solid rgba(79, 142, 247, 0.3);
       }
-
-      /* Smooth scroll */
       html {
         scroll-behavior: smooth;
       }
-
-      /* Progress bar animation */
       .progress-fill {
         animation: progressFill 3s linear forwards;
       }
@@ -264,7 +270,7 @@
         }
       }
 
-      /* Card staggered animation */
+      /* Card stagger */
       .card-delay-1 {
         animation-delay: 0.1s;
         opacity: 0;
@@ -277,15 +283,25 @@
         animation-delay: 0.4s;
         opacity: 0;
       }
+
+      /* Armario image grid */
+      .armario-img {
+        width: 100%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        display: block;
+      }
     </style>
   </head>
   <body>
     <div id="root"></div>
 
     <script type="text/babel">
-      const { useState, useRef, useEffect, useCallback } = React;
+      const { useState, useRef, useEffect, useCallback, useMemo } = React;
 
-      /* ─── SVG Icon Components ──────────────────────────── */
+      /* ─────────────────────────────────────────
+       ICONS
+    ───────────────────────────────────────── */
       const Icon = ({
         d,
         size = 24,
@@ -313,6 +329,25 @@
         </svg>
       );
 
+      /* Custom gallery/image icon */
+      const GalleryIconSVG = ({ size = 24, className = "" }) => (
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className={className}
+        >
+          <rect x="3" y="3" width="18" height="18" rx="3" ry="3" />
+          <path d="M3 15l5-5 4 4 3-3 6 6" />
+          <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" stroke="none" />
+        </svg>
+      );
+
       const Icons = {
         Camera: (p) => (
           <Icon
@@ -323,6 +358,7 @@
             ]}
           />
         ),
+        Gallery: (p) => <GalleryIconSVG {...p} />,
         Sparkles: (p) => (
           <Icon
             {...p}
@@ -386,19 +422,73 @@
             ]}
           />
         ),
+        Trash: (p) => (
+          <Icon
+            {...p}
+            d={[
+              "M3 6h18",
+              "M19 6l-1 14H6L5 6",
+              "M9 6V4h6v2",
+              "M10 11v6",
+              "M14 11v6",
+            ]}
+          />
+        ),
+        Close: (p) => <Icon {...p} d="M18 6L6 18M6 6l12 12" />,
       };
 
-      /* ─── Stars Background ─────────────────────────────── */
+      /* ─────────────────────────────────────────
+       LOCALSTORAGE HELPERS
+    ───────────────────────────────────────── */
+      const STORAGE_KEY = "astroArmario";
+
+      const loadArmario = () => {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : [];
+        } catch {
+          return [];
+        }
+      };
+
+      const saveToArmario = (base64) => {
+        try {
+          const arr = loadArmario();
+          arr.unshift({
+            id: Date.now(),
+            src: base64,
+            date: new Date().toLocaleDateString("es-ES"),
+          });
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+        } catch (e) {
+          console.warn("localStorage lleno:", e);
+        }
+      };
+
+      const deleteFromArmario = (id) => {
+        try {
+          const arr = loadArmario().filter((item) => item.id !== id);
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+        } catch {}
+      };
+
+      /* ─────────────────────────────────────────
+       STARS BACKGROUND
+    ───────────────────────────────────────── */
       const StarsBackground = () => {
-        const stars = Array.from({ length: 60 }, (_, i) => ({
-          id: i,
-          top: `${Math.random() * 100}%`,
-          left: `${Math.random() * 100}%`,
-          duration: `${2 + Math.random() * 4}s`,
-          delay: `${Math.random() * 4}s`,
-          size: Math.random() > 0.8 ? 3 : 2,
-          opacity: 0.3 + Math.random() * 0.7,
-        }));
+        const stars = useMemo(
+          () =>
+            Array.from({ length: 60 }, (_, i) => ({
+              id: i,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              duration: `${2 + Math.random() * 4}s`,
+              delay: `${Math.random() * 4}s`,
+              size: Math.random() > 0.8 ? 3 : 2,
+              opacity: 0.3 + Math.random() * 0.7,
+            })),
+          [],
+        );
         return (
           <div className="stars-bg">
             {stars.map((s) => (
@@ -420,16 +510,18 @@
         );
       };
 
-      /* ─── Header ───────────────────────────────────────── */
-      const Header = ({ onReset, showBack }) => (
+      /* ─────────────────────────────────────────
+       HEADER
+    ───────────────────────────────────────── */
+      const Header = ({ onBack, showBack, backLabel = "Inicio" }) => (
         <header className="relative z-10 flex items-center justify-between px-5 py-4 border-b border-white/5">
           {showBack ? (
             <button
-              onClick={onReset}
+              onClick={onBack}
               className="flex items-center gap-1.5 text-sm text-white/50 hover:text-white transition-colors active:scale-95"
             >
               <Icons.ArrowLeft size={16} />
-              <span>Inicio</span>
+              <span>{backLabel}</span>
             </button>
           ) : (
             <div className="w-16" />
@@ -438,14 +530,12 @@
           <div className="flex items-center gap-2">
             <div
               className="w-7 h-7 rounded-lg flex items-center justify-center"
-              style={{
-                background: "linear-gradient(135deg, #4f8ef7, #a855f7)",
-              }}
+              style={{ background: "linear-gradient(135deg,#4f8ef7,#a855f7)" }}
             >
               <Icons.Star size={14} className="text-white" />
             </div>
             <span
-              className="font-display font-700 text-lg tracking-tight text-white neon-text"
+              className="font-display text-lg tracking-tight text-white neon-text"
               style={{ fontWeight: 700 }}
             >
               AstroLook
@@ -460,15 +550,17 @@
         </header>
       );
 
-      /* ─── Outfit Data ──────────────────────────────────── */
+      /* ─────────────────────────────────────────
+       OUTFIT DATA
+    ───────────────────────────────────────── */
       const outfits = [
         {
           id: 1,
           title: "Look Casual",
           tag: "Everyday",
+          icon: "Sneaker",
           description:
             "Combina ideal con unos jeans rectos oscuros y zapatillas blancas clásicas. Un conjunto fresco y versátil para el día a día.",
-          icon: "Sneaker",
           color: { from: "#4f8ef7", to: "#38bdf8" },
           glow: "rgba(79,142,247,0.35)",
           accent: "text-blue-400",
@@ -485,9 +577,9 @@
           id: 2,
           title: "Look Formal",
           tag: "Professional",
+          icon: "Briefcase",
           description:
             "Dale un toque elegante con un pantalón chino beige y botines de cuero marrón. Sofisticación con clase.",
-          icon: "Briefcase",
           color: { from: "#a855f7", to: "#c084fc" },
           glow: "rgba(168,85,247,0.35)",
           accent: "text-purple-400",
@@ -500,9 +592,9 @@
           id: 3,
           title: "Look Noche",
           tag: "Night Out",
+          icon: "Moon",
           description:
             "Atrévete con un pantalón negro ajustado y una chaqueta de cuero sintético. Estilo oscuro y magnético.",
-          icon: "Moon",
           color: { from: "#e879f9", to: "#a855f7" },
           glow: "rgba(232,121,249,0.35)",
           accent: "text-pink-400",
@@ -517,21 +609,22 @@
         },
       ];
 
-      /* ─── Outfit Card ──────────────────────────────────── */
+      /* ─────────────────────────────────────────
+       OUTFIT CARD
+    ───────────────────────────────────────── */
       const OutfitCard = ({ outfit, index }) => {
         const [pressed, setPressed] = useState(false);
-        const IconComp = Icons[outfit.icon] || Icons.Shirt;
-        const delayClass =
+        const IC = Icons[outfit.icon] || Icons.Shirt;
+        const delay =
           ["card-delay-1", "card-delay-2", "card-delay-3"][index] || "";
         return (
           <div
-            className={`card-border rounded-2xl p-5 animate-card-in ${delayClass}`}
+            className={`card-border rounded-2xl p-5 animate-card-in ${delay}`}
             style={{
               borderRadius: "16px",
               boxShadow: `0 4px 30px ${outfit.glow}`,
             }}
           >
-            {/* Card top row */}
             <div className="flex items-start justify-between mb-3">
               <div>
                 <span
@@ -541,7 +634,7 @@
                   {outfit.tag}
                 </span>
                 <h3
-                  className="font-display font-bold text-xl text-white"
+                  className="font-display text-xl text-white"
                   style={{ fontWeight: 700 }}
                 >
                   {outfit.title}
@@ -550,20 +643,16 @@
               <div
                 className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ml-3"
                 style={{
-                  background: `linear-gradient(135deg, ${outfit.color.from}22, ${outfit.color.to}22)`,
+                  background: `linear-gradient(135deg,${outfit.color.from}22,${outfit.color.to}22)`,
                   border: `1px solid ${outfit.border}`,
                 }}
               >
-                <IconComp size={22} className={outfit.accent} />
+                <IC size={22} className={outfit.accent} />
               </div>
             </div>
-
-            {/* Description */}
             <p className="text-sm text-white/60 leading-relaxed mb-4">
               {outfit.description}
             </p>
-
-            {/* Items list */}
             <div className="space-y-1.5 mb-5">
               {outfit.items.map((item, i) => (
                 <div key={i} className="flex items-center gap-2">
@@ -575,16 +664,12 @@
                 </div>
               ))}
             </div>
-
-            {/* Divider */}
             <div
               className="h-px w-full mb-4"
               style={{
-                background: `linear-gradient(90deg, ${outfit.border}, transparent)`,
+                background: `linear-gradient(90deg,${outfit.border},transparent)`,
               }}
             />
-
-            {/* CTA button */}
             <button
               onMouseDown={() => setPressed(true)}
               onMouseUp={() => setPressed(false)}
@@ -593,8 +678,8 @@
               className="w-full flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-semibold transition-all duration-200"
               style={{
                 background: pressed
-                  ? `linear-gradient(135deg, ${outfit.color.from}33, ${outfit.color.to}33)`
-                  : `linear-gradient(135deg, ${outfit.color.from}18, ${outfit.color.to}18)`,
+                  ? `linear-gradient(135deg,${outfit.color.from}33,${outfit.color.to}33)`
+                  : `linear-gradient(135deg,${outfit.color.from}18,${outfit.color.to}18)`,
                 border: `1px solid ${outfit.border}`,
                 color: outfit.tagColor,
                 transform: pressed ? "scale(0.97)" : "scale(1)",
@@ -607,7 +692,9 @@
         );
       };
 
-      /* ─── Loading Screen ───────────────────────────────── */
+      /* ─────────────────────────────────────────
+       LOADING SCREEN
+    ───────────────────────────────────────── */
       const LoadingScreen = ({ imageUrl }) => {
         const steps = [
           "Detectando tipo de prenda...",
@@ -615,7 +702,6 @@
           "Generando combinaciones de outfits...",
         ];
         const [step, setStep] = useState(0);
-
         useEffect(() => {
           const t1 = setTimeout(() => setStep(1), 1000);
           const t2 = setTimeout(() => setStep(2), 2000);
@@ -627,14 +713,13 @@
 
         return (
           <div className="flex flex-col items-center px-6 py-8 animate-fade-in">
-            {/* Image preview */}
             <div className="relative mb-8">
               <div
                 className="w-28 h-28 rounded-2xl overflow-hidden"
                 style={{
                   border: "2px solid rgba(79,142,247,0.4)",
                   boxShadow:
-                    "0 0 30px rgba(79,142,247,0.3), 0 0 60px rgba(168,85,247,0.2)",
+                    "0 0 30px rgba(79,142,247,0.3),0 0 60px rgba(168,85,247,0.2)",
                 }}
               >
                 <img
@@ -643,52 +728,46 @@
                   className="w-full h-full object-cover"
                 />
               </div>
-              {/* Scan overlay animation */}
               <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
                 <div
                   className="absolute inset-x-0 h-0.5 animate-bounce"
                   style={{
                     background:
-                      "linear-gradient(90deg, transparent, #4f8ef7, transparent)",
+                      "linear-gradient(90deg,transparent,#4f8ef7,transparent)",
                     top: "40%",
                   }}
                 />
               </div>
-              {/* Corner decorators */}
               {[
                 ["top-0 left-0", "border-t-2 border-l-2"],
                 ["top-0 right-0", "border-t-2 border-r-2"],
                 ["bottom-0 left-0", "border-b-2 border-l-2"],
                 ["bottom-0 right-0", "border-b-2 border-r-2"],
-              ].map(([pos, borders], i) => (
+              ].map(([pos, b], i) => (
                 <div
                   key={i}
-                  className={`absolute w-3 h-3 ${pos} ${borders} rounded-sm`}
+                  className={`absolute w-3 h-3 ${pos} ${b} rounded-sm`}
                   style={{ borderColor: "#4f8ef7" }}
                 />
               ))}
             </div>
 
-            {/* Spinner */}
             <div className="relative flex items-center justify-center mb-6">
               <div className="spinner-ring" />
               <div
-                className="absolute w-10 h-10 rounded-full"
+                className="absolute w-10 h-10 rounded-full flex items-center justify-center"
                 style={{
                   background:
-                    "linear-gradient(135deg, rgba(79,142,247,0.2), rgba(168,85,247,0.2))",
+                    "linear-gradient(135deg,rgba(79,142,247,0.2),rgba(168,85,247,0.2))",
                   border: "1px solid rgba(79,142,247,0.3)",
                 }}
               >
-                <div className="w-full h-full flex items-center justify-center">
-                  <Icons.Sparkles size={18} className="text-blue-400" />
-                </div>
+                <Icons.Sparkles size={18} className="text-blue-400" />
               </div>
             </div>
 
-            {/* Title */}
             <h2
-              className="font-display font-bold text-xl text-white text-center mb-2"
+              className="font-display text-xl text-white text-center mb-2"
               style={{ fontWeight: 700 }}
             >
               Analizando tu prenda
@@ -697,7 +776,6 @@
               La IA está creando tus outfits personalizados
             </p>
 
-            {/* Steps */}
             <div className="w-full space-y-3 mb-8">
               {steps.map((s, i) => (
                 <div
@@ -710,7 +788,7 @@
                     style={{
                       background:
                         i < step
-                          ? "linear-gradient(135deg, #4f8ef7, #a855f7)"
+                          ? "linear-gradient(135deg,#4f8ef7,#a855f7)"
                           : i === step
                             ? "rgba(79,142,247,0.2)"
                             : "rgba(255,255,255,0.05)",
@@ -748,7 +826,6 @@
               ))}
             </div>
 
-            {/* Progress bar */}
             <div
               className="w-full h-1 rounded-full overflow-hidden"
               style={{ background: "rgba(255,255,255,0.06)" }}
@@ -756,8 +833,7 @@
               <div
                 className="h-full rounded-full progress-fill"
                 style={{
-                  background:
-                    "linear-gradient(90deg, #4f8ef7, #a855f7, #e879f9)",
+                  background: "linear-gradient(90deg,#4f8ef7,#a855f7,#e879f9)",
                 }}
               />
             </div>
@@ -765,10 +841,11 @@
         );
       };
 
-      /* ─── Results Screen ───────────────────────────────── */
+      /* ─────────────────────────────────────────
+       RESULTS SCREEN
+    ───────────────────────────────────────── */
       const ResultsScreen = ({ imageUrl, onReset }) => (
         <div className="animate-fade-in px-4 pb-10">
-          {/* Preview strip */}
           <div
             className="flex items-center gap-3 mx-1 mb-6 p-3 rounded-2xl"
             style={{
@@ -796,25 +873,22 @@
             </div>
           </div>
 
-          {/* Section title */}
           <div className="flex items-center gap-2 mb-5 px-1">
             <Icons.Sparkles size={16} className="text-purple-400" />
             <h2
-              className="font-display font-bold text-lg text-white"
+              className="font-display text-lg text-white"
               style={{ fontWeight: 700 }}
             >
               Tus outfits personalizados
             </h2>
           </div>
 
-          {/* Cards */}
           <div className="space-y-4 mb-8">
             {outfits.map((outfit, i) => (
               <OutfitCard key={outfit.id} outfit={outfit} index={i} />
             ))}
           </div>
 
-          {/* Reset button */}
           <button
             onClick={onReset}
             className="w-full flex items-center justify-center gap-2 rounded-2xl py-4 text-sm font-semibold transition-all duration-200 active:scale-95"
@@ -830,22 +904,208 @@
         </div>
       );
 
-      /* ─── Home Screen ──────────────────────────────────── */
-      const HomeScreen = ({ onFileSelect }) => {
-        const fileInputRef = useRef(null);
-        const [dragging, setDragging] = useState(false);
+      /* ─────────────────────────────────────────
+       ARMARIO SCREEN  ← NUEVO
+    ───────────────────────────────────────── */
+      const ArmarioScreen = ({ onBack }) => {
+        const [items, setItems] = useState(() => loadArmario());
+        const [preview, setPreview] = useState(null);
 
-        const triggerInput = () => fileInputRef.current?.click();
+        const handleDelete = (id) => {
+          deleteFromArmario(id);
+          setItems(loadArmario());
+          if (preview && preview.id === id) setPreview(null);
+        };
+
+        return (
+          <div className="animate-fade-in px-4 pb-10">
+            {/* Título de sección */}
+            <div className="flex items-center gap-2 mt-3 mb-5">
+              <Icons.Briefcase size={18} className="text-purple-400" />
+              <h2
+                className="font-display text-xl text-white"
+                style={{ fontWeight: 700 }}
+              >
+                Mi Armario Virtual
+              </h2>
+              {items.length > 0 && (
+                <span
+                  className="ml-auto text-xs font-semibold px-2.5 py-1 rounded-full"
+                  style={{
+                    background: "rgba(168,85,247,0.15)",
+                    color: "#c4b5fd",
+                    border: "1px solid rgba(168,85,247,0.3)",
+                  }}
+                >
+                  {items.length} prenda{items.length !== 1 ? "s" : ""}
+                </span>
+              )}
+            </div>
+
+            {/* Estado vacío */}
+            {items.length === 0 && (
+              <div className="flex flex-col items-center justify-center py-24 gap-5">
+                <div
+                  className="w-20 h-20 rounded-3xl flex items-center justify-center"
+                  style={{
+                    background:
+                      "linear-gradient(135deg,rgba(79,142,247,0.08),rgba(168,85,247,0.08))",
+                    border: "1px solid rgba(79,142,247,0.18)",
+                  }}
+                >
+                  <Icons.Shirt size={38} className="text-white/15" />
+                </div>
+                <p className="text-white/30 text-sm text-center leading-relaxed">
+                  Tu armario está vacío.
+                  <br />
+                  <span className="text-white/45">
+                    Escanea tu primera prenda para empezar.
+                  </span>
+                </p>
+                <button
+                  onClick={onBack}
+                  className="btn-glow rounded-2xl px-6 py-3 text-sm font-semibold text-white flex items-center gap-2"
+                >
+                  <Icons.Camera size={15} />
+                  Escanear prenda
+                </button>
+              </div>
+            )}
+
+            {/* Grid 2 columnas */}
+            {items.length > 0 && (
+              <>
+                <div className="grid grid-cols-2 gap-3 mb-8">
+                  {items.map((item, idx) => (
+                    <div
+                      key={item.id}
+                      className="animate-pop-in relative"
+                      style={{ animationDelay: `${idx * 0.06}s`, opacity: 0 }}
+                    >
+                      {/* Imagen */}
+                      <div
+                        className="relative rounded-2xl overflow-hidden cursor-pointer"
+                        style={{
+                          border: "1px solid rgba(79,142,247,0.22)",
+                          boxShadow: "0 4px 20px rgba(0,0,0,0.45)",
+                        }}
+                        onClick={() => setPreview(item)}
+                      >
+                        <img
+                          src={item.src}
+                          alt={`Prenda ${idx + 1}`}
+                          className="armario-img"
+                        />
+                        {/* Gradiente inferior */}
+                        <div
+                          className="absolute inset-0 pointer-events-none rounded-2xl"
+                          style={{
+                            background:
+                              "linear-gradient(to top,rgba(4,4,15,0.75) 0%,transparent 55%)",
+                          }}
+                        />
+                        <p className="absolute bottom-2 left-2.5 text-xs text-white/55">
+                          {item.date}
+                        </p>
+                      </div>
+                      {/* Botón borrar */}
+                      <button
+                        onClick={() => handleDelete(item.id)}
+                        className="absolute top-2 right-2 w-7 h-7 rounded-full flex items-center justify-center active:scale-90 transition-transform"
+                        style={{
+                          background: "rgba(8,8,22,0.82)",
+                          border: "1px solid rgba(255,255,255,0.12)",
+                        }}
+                      >
+                        <Icons.Trash size={13} className="text-white/50" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Botón volver */}
+                <button
+                  onClick={onBack}
+                  className="w-full flex items-center justify-center gap-2 rounded-2xl py-4 text-sm font-semibold transition-all duration-200 active:scale-95"
+                  style={{
+                    background: "rgba(255,255,255,0.05)",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    color: "rgba(255,255,255,0.7)",
+                  }}
+                >
+                  <Icons.ArrowLeft size={16} />
+                  Volver al inicio
+                </button>
+              </>
+            )}
+
+            {/* Modal preview pantalla completa */}
+            {preview && (
+              <div
+                className="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 animate-fade-in"
+                style={{
+                  background: "rgba(4,4,15,0.93)",
+                  backdropFilter: "blur(14px)",
+                }}
+                onClick={() => setPreview(null)}
+              >
+                <div
+                  className="relative w-full max-w-xs"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <img
+                    src={preview.src}
+                    alt="Vista previa"
+                    className="w-full rounded-3xl object-cover"
+                    style={{
+                      border: "1px solid rgba(79,142,247,0.35)",
+                      boxShadow: "0 0 60px rgba(79,142,247,0.25)",
+                      maxHeight: "65vh",
+                    }}
+                  />
+                  <p className="text-center text-xs text-white/40 mt-3">
+                    {preview.date}
+                  </p>
+                  <button
+                    onClick={() => setPreview(null)}
+                    className="absolute -top-3 -right-3 w-8 h-8 rounded-full flex items-center justify-center"
+                    style={{
+                      background: "linear-gradient(135deg,#4f8ef7,#a855f7)",
+                      boxShadow: "0 0 16px rgba(79,142,247,0.5)",
+                    }}
+                  >
+                    <Icons.Close size={14} className="text-white" />
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      };
+
+      /* ─────────────────────────────────────────
+       HOME SCREEN  (con doble botón + acceso armario)
+    ───────────────────────────────────────── */
+      const HomeScreen = ({ onFileSelect, onGoArmario }) => {
+        const cameraInputRef = useRef(null);
+        const galleryInputRef = useRef(null);
+
+        const handleChange = (e) => {
+          const file = e.target.files?.[0];
+          if (file) onFileSelect(file);
+          /* reset value para permitir seleccionar el mismo archivo */
+          e.target.value = "";
+        };
 
         return (
           <div className="flex flex-col items-center px-6 py-4 animate-fade-in">
-            {/* Hero icon */}
+            {/* Hero icon flotante */}
             <div className="animate-float mb-2 mt-4">
               <div
                 className="w-24 h-24 rounded-3xl flex items-center justify-center relative"
                 style={{
                   background:
-                    "linear-gradient(135deg, rgba(79,142,247,0.15), rgba(168,85,247,0.15))",
+                    "linear-gradient(135deg,rgba(79,142,247,0.15),rgba(168,85,247,0.15))",
                   border: "1px solid rgba(79,142,247,0.25)",
                   boxShadow: "0 0 40px rgba(79,142,247,0.2)",
                 }}
@@ -854,7 +1114,7 @@
                 <div
                   className="absolute -top-2 -right-2 w-7 h-7 rounded-full flex items-center justify-center"
                   style={{
-                    background: "linear-gradient(135deg, #a855f7, #e879f9)",
+                    background: "linear-gradient(135deg,#a855f7,#e879f9)",
                   }}
                 >
                   <Icons.Sparkles size={14} className="text-white" />
@@ -862,9 +1122,9 @@
               </div>
             </div>
 
-            {/* Hero text */}
+            {/* Texto hero */}
             <h1
-              className="font-display font-black text-3xl text-white text-center leading-tight mb-2 mt-4"
+              className="font-display text-3xl text-white text-center leading-tight mb-2 mt-4"
               style={{ fontWeight: 900 }}
             >
               Tu <span className="shimmer-text">stylist AI</span>
@@ -878,65 +1138,62 @@
               combinarla al instante
             </p>
 
-            {/* Main CTA */}
-            <div
-              onClick={triggerInput}
-              onDragOver={(e) => {
-                e.preventDefault();
-                setDragging(true);
-              }}
-              onDragLeave={() => setDragging(false)}
-              onDrop={(e) => {
-                e.preventDefault();
-                setDragging(false);
-                onFileSelect(e.dataTransfer.files[0]);
-              }}
-              className="w-full cursor-pointer rounded-3xl p-8 flex flex-col items-center gap-3 transition-all duration-300 mb-6"
-              style={{
-                background: dragging
-                  ? "rgba(79,142,247,0.12)"
-                  : "linear-gradient(145deg, rgba(79,142,247,0.06), rgba(168,85,247,0.06))",
-                border: `2px dashed ${dragging ? "#4f8ef7" : "rgba(79,142,247,0.25)"}`,
-                boxShadow: dragging ? "0 0 30px rgba(79,142,247,0.2)" : "none",
-              }}
-            >
-              <div
-                className="w-16 h-16 rounded-2xl flex items-center justify-center"
-                style={{
-                  background:
-                    "linear-gradient(135deg, rgba(79,142,247,0.2), rgba(168,85,247,0.2))",
-                  border: "1px solid rgba(79,142,247,0.3)",
-                }}
+            {/* ── DOBLE BOTÓN DE SUBIDA ── */}
+            <div className="w-full grid grid-cols-2 gap-3 mb-4">
+              {/* Opción 1: Hacer Foto (cámara) */}
+              <button
+                onClick={() => cameraInputRef.current?.click()}
+                className="btn-glow-blue rounded-2xl py-4 flex flex-col items-center gap-2 text-white font-semibold text-sm active:scale-95"
               >
-                <Icons.Camera size={28} className="text-blue-300" />
-              </div>
-              <p className="text-white/60 text-sm text-center">
-                Toca para subir foto o arrastrar aquí
-              </p>
+                <Icons.Camera size={22} className="text-white" />
+                Hacer Foto
+              </button>
+
+              {/* Opción 2: Subir de Galería */}
+              <button
+                onClick={() => galleryInputRef.current?.click()}
+                className="btn-glow-purple rounded-2xl py-4 flex flex-col items-center gap-2 text-white font-semibold text-sm active:scale-95"
+              >
+                <Icons.Gallery size={22} className="text-white" />
+                Subir de Galería
+              </button>
             </div>
 
-            {/* Primary CTA button */}
+            {/* ── BOTÓN ARMARIO VIRTUAL ── */}
             <button
-              onClick={triggerInput}
-              className="btn-glow w-full rounded-2xl py-4 flex items-center justify-center gap-3 text-white font-bold text-base active:scale-95"
+              onClick={onGoArmario}
+              className="w-full flex items-center justify-center gap-2 rounded-2xl py-3.5 text-sm font-semibold transition-all duration-200 active:scale-95 mb-8"
+              style={{
+                background: "rgba(168,85,247,0.07)",
+                border: "1px solid rgba(168,85,247,0.28)",
+                color: "rgba(196,181,253,0.9)",
+              }}
             >
-              <Icons.Scan size={20} />
-              Escanear Prenda
+              <Icons.Briefcase size={17} />
+              Ver mi Armario Virtual
             </button>
 
+            {/* Inputs ocultos */}
+            {/* Cámara: con capture="environment" */}
             <input
-              ref={fileInputRef}
+              ref={cameraInputRef}
               type="file"
               accept="image/*"
               capture="environment"
               className="hidden"
-              onChange={(e) =>
-                e.target.files?.[0] && onFileSelect(e.target.files[0])
-              }
+              onChange={handleChange}
+            />
+            {/* Galería: SIN capture, para abrir el selector de archivos */}
+            <input
+              ref={galleryInputRef}
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={handleChange}
             />
 
             {/* Features row */}
-            <div className="w-full mt-8 grid grid-cols-3 gap-3">
+            <div className="w-full grid grid-cols-3 gap-3">
               {[
                 { icon: "Camera", label: "Foto en vivo", sub: "o galería" },
                 { icon: "Sparkles", label: "Análisis IA", sub: "instantáneo" },
@@ -965,16 +1222,31 @@
         );
       };
 
-      /* ─── Main App ─────────────────────────────────────── */
+      /* ─────────────────────────────────────────
+       APP  (estado principal)
+    ───────────────────────────────────────── */
       const App = () => {
-        const [screen, setScreen] = useState("home"); // 'home' | 'loading' | 'results'
+        // screen: 'home' | 'loading' | 'results' | 'armario'
+        const [screen, setScreen] = useState("home");
         const [imageUrl, setImageUrl] = useState(null);
 
         const handleFileSelect = useCallback((file) => {
           if (!file) return;
-          const url = URL.createObjectURL(file);
-          setImageUrl(url);
+
+          /* 1. Crear URL de objeto para mostrar en la pantalla de carga / resultados */
+          const objectUrl = URL.createObjectURL(file);
+          setImageUrl(objectUrl);
           setScreen("loading");
+
+          /* 2. Leer como Base64 y guardar en localStorage (Armario Virtual) */
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const base64 = e.target.result;
+            saveToArmario(base64);
+          };
+          reader.readAsDataURL(file);
+
+          /* 3. Simular procesamiento IA (3 seg) */
           setTimeout(() => setScreen("results"), 3000);
         }, []);
 
@@ -984,6 +1256,10 @@
           setScreen("home");
         }, [imageUrl]);
 
+        /* Determina si el header muestra botón "Volver" */
+        const showBack = screen !== "home";
+        const backLabel = screen === "armario" ? "Inicio" : "Inicio";
+
         return (
           <div
             className="min-h-screen font-sans"
@@ -992,24 +1268,31 @@
             <StarsBackground />
             <div className="mesh-bg" />
 
-            {/* App shell — mobile-first, max-width centered */}
+            {/* Shell mobile-first */}
             <div
               className="relative z-10 mx-auto flex flex-col min-h-screen"
               style={{ maxWidth: "430px" }}
             >
-              <Header onReset={handleReset} showBack={screen !== "home"} />
+              <Header
+                onBack={handleReset}
+                showBack={showBack}
+                backLabel={backLabel}
+              />
 
               <main className="flex-1 overflow-y-auto">
                 {screen === "home" && (
-                  <HomeScreen onFileSelect={handleFileSelect} />
+                  <HomeScreen
+                    onFileSelect={handleFileSelect}
+                    onGoArmario={() => setScreen("armario")}
+                  />
                 )}
                 {screen === "loading" && <LoadingScreen imageUrl={imageUrl} />}
                 {screen === "results" && (
                   <ResultsScreen imageUrl={imageUrl} onReset={handleReset} />
                 )}
+                {screen === "armario" && <ArmarioScreen onBack={handleReset} />}
               </main>
 
-              {/* Bottom safe area bar */}
               <div className="h-6 flex-shrink-0" />
             </div>
           </div>
