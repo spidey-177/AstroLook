@@ -1,694 +1,1022 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head><base href="https://d16ilfvy4mv02r.cloudfront.net/workspaces/1q3IC4Tpch29xbnDAUcgTci75MNjmQL5/f5e8847f-41cf-44a7-95d8-bfcec1682485/files/">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <meta name="theme-color" content="#0a0a1a" />
-  <title>AstroLook ✦ AI Fashion</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            space: {
-              950: '#04040f',
-              900: '#0a0a1a',
-              800: '#0f0f2a',
-              700: '#141435',
-              600: '#1a1a4a',
+  <head>
+    <base
+      href="https://d16ilfvy4mv02r.cloudfront.net/workspaces/1q3IC4Tpch29xbnDAUcgTci75MNjmQL5/f5e8847f-41cf-44a7-95d8-bfcec1682485/files/"
+    />
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    />
+    <meta name="theme-color" content="#0a0a1a" />
+    <title>AstroLook ✦ AI Fashion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              space: {
+                950: "#04040f",
+                900: "#0a0a1a",
+                800: "#0f0f2a",
+                700: "#141435",
+                600: "#1a1a4a",
+              },
+              neon: {
+                blue: "#4f8ef7",
+                blueDark: "#2563eb",
+                purple: "#a855f7",
+                purpleDark: "#7c3aed",
+                pink: "#e879f9",
+              },
             },
-            neon: {
-              blue:   '#4f8ef7',
-              blueDark: '#2563eb',
-              purple: '#a855f7',
-              purpleDark: '#7c3aed',
-              pink:   '#e879f9',
-            }
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              display: ["Space Grotesk", "sans-serif"],
+            },
+            animation: {
+              "spin-slow": "spin 2s linear infinite",
+              "pulse-glow": "pulseGlow 2s ease-in-out infinite",
+              float: "float 3s ease-in-out infinite",
+              "slide-up": "slideUp 0.5s ease-out forwards",
+              "fade-in": "fadeIn 0.4s ease-out forwards",
+              "card-in": "cardIn 0.6s cubic-bezier(0.16,1,0.3,1) forwards",
+              shimmer: "shimmer 1.5s infinite",
+            },
+            keyframes: {
+              pulseGlow: {
+                "0%,100%": {
+                  boxShadow:
+                    "0 0 20px rgba(79,142,247,0.4), 0 0 40px rgba(168,85,247,0.2)",
+                },
+                "50%": {
+                  boxShadow:
+                    "0 0 40px rgba(79,142,247,0.8), 0 0 80px rgba(168,85,247,0.5)",
+                },
+              },
+              float: {
+                "0%,100%": { transform: "translateY(0px)" },
+                "50%": { transform: "translateY(-10px)" },
+              },
+              slideUp: {
+                from: { opacity: "0", transform: "translateY(30px)" },
+                to: { opacity: "1", transform: "translateY(0)" },
+              },
+              fadeIn: {
+                from: { opacity: "0" },
+                to: { opacity: "1" },
+              },
+              cardIn: {
+                from: {
+                  opacity: "0",
+                  transform: "translateY(40px) scale(0.95)",
+                },
+                to: { opacity: "1", transform: "translateY(0) scale(1)" },
+              },
+              shimmer: {
+                "0%": { backgroundPosition: "-200% center" },
+                "100%": { backgroundPosition: "200% center" },
+              },
+            },
           },
-          fontFamily: {
-            sans:    ['Inter', 'sans-serif'],
-            display: ['Space Grotesk', 'sans-serif'],
-          },
-          animation: {
-            'spin-slow':  'spin 2s linear infinite',
-            'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
-            'float':      'float 3s ease-in-out infinite',
-            'slide-up':   'slideUp 0.5s ease-out forwards',
-            'fade-in':    'fadeIn 0.4s ease-out forwards',
-            'card-in':    'cardIn 0.6s cubic-bezier(0.16,1,0.3,1) forwards',
-            'shimmer':    'shimmer 1.5s infinite',
-          },
-          keyframes: {
-            pulseGlow: {
-              '0%,100%': { boxShadow: '0 0 20px rgba(79,142,247,0.4), 0 0 40px rgba(168,85,247,0.2)' },
-              '50%':     { boxShadow: '0 0 40px rgba(79,142,247,0.8), 0 0 80px rgba(168,85,247,0.5)' },
-            },
-            float: {
-              '0%,100%': { transform: 'translateY(0px)' },
-              '50%':     { transform: 'translateY(-10px)' },
-            },
-            slideUp: {
-              from: { opacity: '0', transform: 'translateY(30px)' },
-              to:   { opacity: '1', transform: 'translateY(0)' },
-            },
-            fadeIn: {
-              from: { opacity: '0' },
-              to:   { opacity: '1' },
-            },
-            cardIn: {
-              from: { opacity: '0', transform: 'translateY(40px) scale(0.95)' },
-              to:   { opacity: '1', transform: 'translateY(0) scale(1)' },
-            },
-            shimmer: {
-              '0%':   { backgroundPosition: '-200% center' },
-              '100%': { backgroundPosition:  '200% center' },
-            },
-          }
+        },
+      };
+    </script>
+    <style>
+      * {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+      }
+      body {
+        margin: 0;
+        background-color: #04040f;
+        overflow-x: hidden;
+      }
+
+      /* Stars background */
+      .stars-bg {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 0;
+      }
+      .star {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: white;
+        border-radius: 50%;
+        animation: twinkle var(--duration, 3s) ease-in-out infinite;
+        animation-delay: var(--delay, 0s);
+      }
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.8;
+          transform: scale(1.5);
         }
       }
-    }
-  </script>
-  <style>
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    body { margin: 0; background-color: #04040f; overflow-x: hidden; }
 
-    /* Stars background */
-    .stars-bg {
-      position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0;
-    }
-    .star {
-      position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%;
-      animation: twinkle var(--duration, 3s) ease-in-out infinite;
-      animation-delay: var(--delay, 0s);
-    }
-    @keyframes twinkle {
-      0%,100% { opacity: 0.1; transform: scale(1); }
-      50%      { opacity: 0.8; transform: scale(1.5); }
-    }
+      /* Gradient mesh background */
+      .mesh-bg {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background:
+          radial-gradient(
+            ellipse 60% 40% at 20% 20%,
+            rgba(79, 142, 247, 0.08) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 50% 50% at 80% 80%,
+            rgba(168, 85, 247, 0.08) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 40% 60% at 50% 50%,
+            rgba(232, 121, 249, 0.04) 0%,
+            transparent 70%
+          );
+      }
 
-    /* Gradient mesh background */
-    .mesh-bg {
-      position: fixed; inset: 0; pointer-events: none; z-index: 0;
-      background:
-        radial-gradient(ellipse 60% 40% at 20% 20%, rgba(79,142,247,0.08) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 50% at 80% 80%, rgba(168,85,247,0.08) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 60% at 50% 50%, rgba(232,121,249,0.04) 0%, transparent 70%);
-    }
+      /* Glow button */
+      .btn-glow {
+        background: linear-gradient(135deg, #4f8ef7, #a855f7);
+        box-shadow:
+          0 0 30px rgba(79, 142, 247, 0.5),
+          0 0 60px rgba(168, 85, 247, 0.3);
+        transition: all 0.3s ease;
+      }
+      .btn-glow:hover,
+      .btn-glow:active {
+        box-shadow:
+          0 0 50px rgba(79, 142, 247, 0.8),
+          0 0 100px rgba(168, 85, 247, 0.5);
+        transform: scale(1.02);
+      }
+      .btn-glow:active {
+        transform: scale(0.97);
+      }
 
-    /* Glow button */
-    .btn-glow {
-      background: linear-gradient(135deg, #4f8ef7, #a855f7);
-      box-shadow: 0 0 30px rgba(79,142,247,0.5), 0 0 60px rgba(168,85,247,0.3);
-      transition: all 0.3s ease;
-    }
-    .btn-glow:hover, .btn-glow:active {
-      box-shadow: 0 0 50px rgba(79,142,247,0.8), 0 0 100px rgba(168,85,247,0.5);
-      transform: scale(1.02);
-    }
-    .btn-glow:active { transform: scale(0.97); }
+      /* Card gradient border */
+      .card-border {
+        position: relative;
+        background: linear-gradient(145deg, #0f0f2a, #141435);
+        border: 1px solid transparent;
+        background-clip: padding-box;
+      }
+      .card-border::before {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        border-radius: inherit;
+        z-index: -1;
+        background: linear-gradient(
+          135deg,
+          rgba(79, 142, 247, 0.4),
+          rgba(168, 85, 247, 0.4),
+          rgba(232, 121, 249, 0.2)
+        );
+      }
 
-    /* Card gradient border */
-    .card-border {
-      position: relative;
-      background: linear-gradient(145deg, #0f0f2a, #141435);
-      border: 1px solid transparent;
-      background-clip: padding-box;
-    }
-    .card-border::before {
-      content: '';
-      position: absolute; inset: -1px; border-radius: inherit; z-index: -1;
-      background: linear-gradient(135deg, rgba(79,142,247,0.4), rgba(168,85,247,0.4), rgba(232,121,249,0.2));
-    }
+      /* Spinner ring */
+      .spinner-ring {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        border: 3px solid rgba(79, 142, 247, 0.15);
+        border-top-color: #4f8ef7;
+        border-right-color: #a855f7;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
 
-    /* Spinner ring */
-    .spinner-ring {
-      width: 64px; height: 64px; border-radius: 50%;
-      border: 3px solid rgba(79,142,247,0.15);
-      border-top-color: #4f8ef7;
-      border-right-color: #a855f7;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
+      /* Shimmer text */
+      .shimmer-text {
+        background: linear-gradient(
+          90deg,
+          #4f8ef7 0%,
+          #e879f9 25%,
+          #a855f7 50%,
+          #4f8ef7 75%,
+          #e879f9 100%
+        );
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmer 3s linear infinite;
+      }
 
-    /* Shimmer text */
-    .shimmer-text {
-      background: linear-gradient(90deg, #4f8ef7 0%, #e879f9 25%, #a855f7 50%, #4f8ef7 75%, #e879f9 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: shimmer 3s linear infinite;
-    }
+      /* Neon text */
+      .neon-text {
+        text-shadow:
+          0 0 10px rgba(79, 142, 247, 0.8),
+          0 0 20px rgba(168, 85, 247, 0.5);
+      }
 
-    /* Neon text */
-    .neon-text {
-      text-shadow: 0 0 10px rgba(79,142,247,0.8), 0 0 20px rgba(168,85,247,0.5);
-    }
+      /* Tag gradient */
+      .tag-gradient {
+        background: linear-gradient(
+          135deg,
+          rgba(79, 142, 247, 0.15),
+          rgba(168, 85, 247, 0.15)
+        );
+        border: 1px solid rgba(79, 142, 247, 0.3);
+      }
 
-    /* Tag gradient */
-    .tag-gradient {
-      background: linear-gradient(135deg, rgba(79,142,247,0.15), rgba(168,85,247,0.15));
-      border: 1px solid rgba(79,142,247,0.3);
-    }
+      /* Smooth scroll */
+      html {
+        scroll-behavior: smooth;
+      }
 
-    /* Smooth scroll */
-    html { scroll-behavior: smooth; }
+      /* Progress bar animation */
+      .progress-fill {
+        animation: progressFill 3s linear forwards;
+      }
+      @keyframes progressFill {
+        from {
+          width: 0%;
+        }
+        to {
+          width: 100%;
+        }
+      }
 
-    /* Progress bar animation */
-    .progress-fill {
-      animation: progressFill 3s linear forwards;
-    }
-    @keyframes progressFill {
-      from { width: 0%; }
-      to   { width: 100%; }
-    }
+      /* Card staggered animation */
+      .card-delay-1 {
+        animation-delay: 0.1s;
+        opacity: 0;
+      }
+      .card-delay-2 {
+        animation-delay: 0.25s;
+        opacity: 0;
+      }
+      .card-delay-3 {
+        animation-delay: 0.4s;
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
 
-    /* Card staggered animation */
-    .card-delay-1 { animation-delay: 0.1s; opacity: 0; }
-    .card-delay-2 { animation-delay: 0.25s; opacity: 0; }
-    .card-delay-3 { animation-delay: 0.4s; opacity: 0; }
-  </style>
-</head>
-<body>
-  <div id="root"></div>
+    <script type="text/babel">
+      const { useState, useRef, useEffect, useCallback } = React;
 
-  <script type="text/babel">
-    const { useState, useRef, useEffect, useCallback } = React;
-
-    /* ─── SVG Icon Components ──────────────────────────── */
-    const Icon = ({ d, size = 24, stroke = 'currentColor', fill = 'none', strokeWidth = 2, className = '' }) => (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill={fill} stroke={stroke}
-        strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={className}>
-        {Array.isArray(d) ? d.map((p, i) => <path key={i} d={p} />) : <path d={d} />}
-      </svg>
-    );
-
-    const Icons = {
-      Camera: (p) => <Icon {...p} d={[
-        "M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z",
-        "M12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"
-      ]} />,
-      Sparkles: (p) => <Icon {...p} d={[
-        "M12 3l1.09 3.34L16.5 7.5l-3.41 1.16L12 12l-1.09-3.34L7.5 7.5l3.41-1.16L12 3z",
-        "M5 17l.55 1.7L7.25 19.5l-1.7.55L5 21.75l-.55-1.7L2.75 19.5l1.7-.55L5 17z",
-        "M19 3l.55 1.7L21.25 5.5l-1.7.55L19 7.75l-.55-1.7L16.75 5.5l1.7-.55L19 3z"
-      ]} />,
-      Sneaker: (p) => <Icon {...p} d="M4 16l1-4h14l1 4H4zM3 16h18v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-2zM8 12V9m4 3V8m4 4v-3" />,
-      Briefcase: (p) => <Icon {...p} d={[
-        "M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z",
-        "M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"
-      ]} />,
-      Moon: (p) => <Icon {...p} d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />,
-      ArrowLeft: (p) => <Icon {...p} d="M19 12H5M5 12l7 7M5 12l7-7" />,
-      Star: (p) => <Icon {...p} d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor" stroke="none" />,
-      Scan: (p) => <Icon {...p} d={[
-        "M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2",
-        "M8 12h8M12 8v8"
-      ]} />,
-      Shirt: (p) => <Icon {...p} d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z" />,
-      ChevronRight: (p) => <Icon {...p} d="M9 18l6-6-6-6" />,
-      Refresh: (p) => <Icon {...p} d={[
-        "M1 4v6h6",
-        "M23 20v-6h-6",
-        "M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"
-      ]} />,
-    };
-
-    /* ─── Stars Background ─────────────────────────────── */
-    const StarsBackground = () => {
-      const stars = Array.from({ length: 60 }, (_, i) => ({
-        id: i,
-        top:      `${Math.random() * 100}%`,
-        left:     `${Math.random() * 100}%`,
-        duration: `${2 + Math.random() * 4}s`,
-        delay:    `${Math.random() * 4}s`,
-        size:     Math.random() > 0.8 ? 3 : 2,
-        opacity:  0.3 + Math.random() * 0.7,
-      }));
-      return (
-        <div className="stars-bg">
-          {stars.map(s => (
-            <div key={s.id} className="star" style={{
-              top: s.top, left: s.left, width: s.size, height: s.size,
-              '--duration': s.duration, '--delay': s.delay, opacity: s.opacity,
-            }} />
-          ))}
-        </div>
+      /* ─── SVG Icon Components ──────────────────────────── */
+      const Icon = ({
+        d,
+        size = 24,
+        stroke = "currentColor",
+        fill = "none",
+        strokeWidth = 2,
+        className = "",
+      }) => (
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 24 24"
+          fill={fill}
+          stroke={stroke}
+          strokeWidth={strokeWidth}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className={className}
+        >
+          {Array.isArray(d) ? (
+            d.map((p, i) => <path key={i} d={p} />)
+          ) : (
+            <path d={d} />
+          )}
+        </svg>
       );
-    };
 
-    /* ─── Header ───────────────────────────────────────── */
-    const Header = ({ onReset, showBack }) => (
-      <header className="relative z-10 flex items-center justify-between px-5 py-4 border-b border-white/5">
-        {showBack ? (
-          <button onClick={onReset}
-            className="flex items-center gap-1.5 text-sm text-white/50 hover:text-white transition-colors active:scale-95">
-            <Icons.ArrowLeft size={16} />
-            <span>Inicio</span>
-          </button>
-        ) : <div className="w-16" />}
-
-        <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg flex items-center justify-center"
-            style={{ background: 'linear-gradient(135deg, #4f8ef7, #a855f7)' }}>
-            <Icons.Star size={14} className="text-white" />
-          </div>
-          <span className="font-display font-700 text-lg tracking-tight text-white neon-text"
-            style={{ fontWeight: 700 }}>
-            AstroLook
-          </span>
-        </div>
-
-        <div className="w-16 flex justify-end">
-          <div className="tag-gradient rounded-full px-2 py-0.5 text-xs text-blue-300 font-medium">
-            AI ✦
-          </div>
-        </div>
-      </header>
-    );
-
-    /* ─── Outfit Data ──────────────────────────────────── */
-    const outfits = [
-      {
-        id: 1,
-        title: 'Look Casual',
-        tag: 'Everyday',
-        description: 'Combina ideal con unos jeans rectos oscuros y zapatillas blancas clásicas. Un conjunto fresco y versátil para el día a día.',
-        icon: 'Sneaker',
-        color: { from: '#4f8ef7', to: '#38bdf8' },
-        glow: 'rgba(79,142,247,0.35)',
-        accent: 'text-blue-400',
-        border: 'rgba(79,142,247,0.3)',
-        tagBg: 'rgba(79,142,247,0.12)',
-        tagColor: '#93c5fd',
-        items: ['Jeans rectos oscuros', 'Zapatillas blancas', 'Cinturón negro'],
-      },
-      {
-        id: 2,
-        title: 'Look Formal',
-        tag: 'Professional',
-        description: 'Dale un toque elegante con un pantalón chino beige y botines de cuero marrón. Sofisticación con clase.',
-        icon: 'Briefcase',
-        color: { from: '#a855f7', to: '#c084fc' },
-        glow: 'rgba(168,85,247,0.35)',
-        accent: 'text-purple-400',
-        border: 'rgba(168,85,247,0.3)',
-        tagBg: 'rgba(168,85,247,0.12)',
-        tagColor: '#c4b5fd',
-        items: ['Pantalón chino beige', 'Botines marrón', 'Reloj clásico'],
-      },
-      {
-        id: 3,
-        title: 'Look Noche',
-        tag: 'Night Out',
-        description: 'Atrévete con un pantalón negro ajustado y una chaqueta de cuero sintético. Estilo oscuro y magnético.',
-        icon: 'Moon',
-        color: { from: '#e879f9', to: '#a855f7' },
-        glow: 'rgba(232,121,249,0.35)',
-        accent: 'text-pink-400',
-        border: 'rgba(232,121,249,0.3)',
-        tagBg: 'rgba(232,121,249,0.12)',
-        tagColor: '#f0abfc',
-        items: ['Pantalón negro ajustado', 'Chaqueta cuero sintético', 'Chelsea boots'],
-      },
-    ];
-
-    /* ─── Outfit Card ──────────────────────────────────── */
-    const OutfitCard = ({ outfit, index }) => {
-      const [pressed, setPressed] = useState(false);
-      const IconComp = Icons[outfit.icon] || Icons.Shirt;
-      const delayClass = ['card-delay-1', 'card-delay-2', 'card-delay-3'][index] || '';
-      return (
-        <div className={`card-border rounded-2xl p-5 animate-card-in ${delayClass}`}
-          style={{ borderRadius: '16px', boxShadow: `0 4px 30px ${outfit.glow}` }}>
-
-          {/* Card top row */}
-          <div className="flex items-start justify-between mb-3">
-            <div>
-              <span className="text-xs font-semibold rounded-full px-2.5 py-1 inline-block mb-2"
-                style={{ background: outfit.tagBg, color: outfit.tagColor }}>
-                {outfit.tag}
-              </span>
-              <h3 className="font-display font-bold text-xl text-white" style={{ fontWeight: 700 }}>
-                {outfit.title}
-              </h3>
-            </div>
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ml-3"
-              style={{
-                background: `linear-gradient(135deg, ${outfit.color.from}22, ${outfit.color.to}22)`,
-                border: `1px solid ${outfit.border}`,
-              }}>
-              <IconComp size={22} className={outfit.accent} />
-            </div>
-          </div>
-
-          {/* Description */}
-          <p className="text-sm text-white/60 leading-relaxed mb-4">{outfit.description}</p>
-
-          {/* Items list */}
-          <div className="space-y-1.5 mb-5">
-            {outfit.items.map((item, i) => (
-              <div key={i} className="flex items-center gap-2">
-                <div className="w-1 h-1 rounded-full flex-shrink-0"
-                  style={{ background: outfit.color.from }} />
-                <span className="text-xs text-white/50">{item}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Divider */}
-          <div className="h-px w-full mb-4"
-            style={{ background: `linear-gradient(90deg, ${outfit.border}, transparent)` }} />
-
-          {/* CTA button */}
-          <button
-            onMouseDown={() => setPressed(true)}
-            onMouseUp={() => setPressed(false)}
-            onTouchStart={() => setPressed(true)}
-            onTouchEnd={() => setPressed(false)}
-            className="w-full flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-semibold transition-all duration-200"
-            style={{
-              background: pressed
-                ? `linear-gradient(135deg, ${outfit.color.from}33, ${outfit.color.to}33)`
-                : `linear-gradient(135deg, ${outfit.color.from}18, ${outfit.color.to}18)`,
-              border: `1px solid ${outfit.border}`,
-              color: outfit.tagColor,
-              transform: pressed ? 'scale(0.97)' : 'scale(1)',
-            }}>
-            <Icons.ChevronRight size={15} />
-            Ver prendas similares
-          </button>
-        </div>
-      );
-    };
-
-    /* ─── Loading Screen ───────────────────────────────── */
-    const LoadingScreen = ({ imageUrl }) => {
-      const steps = [
-        'Detectando tipo de prenda...',
-        'Analizando colores y textura...',
-        'Generando combinaciones de outfits...',
-      ];
-      const [step, setStep] = useState(0);
-
-      useEffect(() => {
-        const t1 = setTimeout(() => setStep(1), 1000);
-        const t2 = setTimeout(() => setStep(2), 2000);
-        return () => { clearTimeout(t1); clearTimeout(t2); };
-      }, []);
-
-      return (
-        <div className="flex flex-col items-center px-6 py-8 animate-fade-in">
-          {/* Image preview */}
-          <div className="relative mb-8">
-            <div className="w-28 h-28 rounded-2xl overflow-hidden"
-              style={{
-                border: '2px solid rgba(79,142,247,0.4)',
-                boxShadow: '0 0 30px rgba(79,142,247,0.3), 0 0 60px rgba(168,85,247,0.2)',
-              }}>
-              <img src={imageUrl} alt="Prenda" className="w-full h-full object-cover" />
-            </div>
-            {/* Scan overlay animation */}
-            <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
-              <div className="absolute inset-x-0 h-0.5 animate-bounce"
-                style={{ background: 'linear-gradient(90deg, transparent, #4f8ef7, transparent)', top: '40%' }} />
-            </div>
-            {/* Corner decorators */}
-            {[['top-0 left-0', 'border-t-2 border-l-2'], ['top-0 right-0', 'border-t-2 border-r-2'],
-              ['bottom-0 left-0', 'border-b-2 border-l-2'], ['bottom-0 right-0', 'border-b-2 border-r-2']].map(([pos, borders], i) => (
-              <div key={i} className={`absolute w-3 h-3 ${pos} ${borders} rounded-sm`}
-                style={{ borderColor: '#4f8ef7' }} />
-            ))}
-          </div>
-
-          {/* Spinner */}
-          <div className="relative flex items-center justify-center mb-6">
-            <div className="spinner-ring" />
-            <div className="absolute w-10 h-10 rounded-full"
-              style={{
-                background: 'linear-gradient(135deg, rgba(79,142,247,0.2), rgba(168,85,247,0.2))',
-                border: '1px solid rgba(79,142,247,0.3)',
-              }}>
-              <div className="w-full h-full flex items-center justify-center">
-                <Icons.Sparkles size={18} className="text-blue-400" />
-              </div>
-            </div>
-          </div>
-
-          {/* Title */}
-          <h2 className="font-display font-bold text-xl text-white text-center mb-2"
-            style={{ fontWeight: 700 }}>
-            Analizando tu prenda
-          </h2>
-          <p className="text-sm text-white/40 text-center mb-8">
-            La IA está creando tus outfits personalizados
-          </p>
-
-          {/* Steps */}
-          <div className="w-full space-y-3 mb-8">
-            {steps.map((s, i) => (
-              <div key={i}
-                className="flex items-center gap-3 transition-all duration-500"
-                style={{ opacity: i <= step ? 1 : 0.25 }}>
-                <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
-                  style={{
-                    background: i < step ? 'linear-gradient(135deg, #4f8ef7, #a855f7)'
-                      : i === step ? 'rgba(79,142,247,0.2)' : 'rgba(255,255,255,0.05)',
-                    border: i === step ? '1px solid rgba(79,142,247,0.5)' : 'none',
-                    transition: 'all 0.5s ease',
-                  }}>
-                  {i < step
-                    ? <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
-                    : i === step
-                      ? <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-                      : <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
-                  }
-                </div>
-                <span className="text-sm"
-                  style={{ color: i <= step ? '#e2e8f0' : 'rgba(255,255,255,0.25)' }}>
-                  {s}
-                </span>
-              </div>
-            ))}
-          </div>
-
-          {/* Progress bar */}
-          <div className="w-full h-1 rounded-full overflow-hidden"
-            style={{ background: 'rgba(255,255,255,0.06)' }}>
-            <div className="h-full rounded-full progress-fill"
-              style={{ background: 'linear-gradient(90deg, #4f8ef7, #a855f7, #e879f9)' }} />
-          </div>
-        </div>
-      );
-    };
-
-    /* ─── Results Screen ───────────────────────────────── */
-    const ResultsScreen = ({ imageUrl, onReset }) => (
-      <div className="animate-fade-in px-4 pb-10">
-        {/* Preview strip */}
-        <div className="flex items-center gap-3 mx-1 mb-6 p-3 rounded-2xl"
-          style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }}>
-          <img src={imageUrl} alt="Prenda analizada"
-            className="w-14 h-14 rounded-xl object-cover flex-shrink-0"
-            style={{ border: '1px solid rgba(79,142,247,0.3)' }} />
-          <div>
-            <p className="text-xs text-white/40 mb-0.5">Prenda analizada</p>
-            <div className="flex items-center gap-1.5">
-              <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-              <p className="text-sm font-semibold text-white">3 outfits generados</p>
-            </div>
-          </div>
-          <div className="ml-auto tag-gradient rounded-xl px-2.5 py-1.5 text-center">
-            <p className="text-xs font-bold shimmer-text">AI</p>
-          </div>
-        </div>
-
-        {/* Section title */}
-        <div className="flex items-center gap-2 mb-5 px-1">
-          <Icons.Sparkles size={16} className="text-purple-400" />
-          <h2 className="font-display font-bold text-lg text-white" style={{ fontWeight: 700 }}>
-            Tus outfits personalizados
-          </h2>
-        </div>
-
-        {/* Cards */}
-        <div className="space-y-4 mb-8">
-          {outfits.map((outfit, i) => (
-            <OutfitCard key={outfit.id} outfit={outfit} index={i} />
-          ))}
-        </div>
-
-        {/* Reset button */}
-        <button onClick={onReset}
-          className="w-full flex items-center justify-center gap-2 rounded-2xl py-4 text-sm font-semibold transition-all duration-200 active:scale-95"
-          style={{
-            background: 'rgba(255,255,255,0.05)',
-            border: '1px solid rgba(255,255,255,0.1)',
-            color: 'rgba(255,255,255,0.7)',
-          }}>
-          <Icons.Refresh size={16} />
-          Escanear otra prenda
-        </button>
-      </div>
-    );
-
-    /* ─── Home Screen ──────────────────────────────────── */
-    const HomeScreen = ({ onFileSelect }) => {
-      const fileInputRef = useRef(null);
-      const [dragging, setDragging] = useState(false);
-
-      const triggerInput = () => fileInputRef.current?.click();
-
-      return (
-        <div className="flex flex-col items-center px-6 py-4 animate-fade-in">
-          {/* Hero icon */}
-          <div className="animate-float mb-2 mt-4">
-            <div className="w-24 h-24 rounded-3xl flex items-center justify-center relative"
-              style={{
-                background: 'linear-gradient(135deg, rgba(79,142,247,0.15), rgba(168,85,247,0.15))',
-                border: '1px solid rgba(79,142,247,0.25)',
-                boxShadow: '0 0 40px rgba(79,142,247,0.2)',
-              }}>
-              <Icons.Shirt size={44} className="text-blue-300" />
-              <div className="absolute -top-2 -right-2 w-7 h-7 rounded-full flex items-center justify-center"
-                style={{ background: 'linear-gradient(135deg, #a855f7, #e879f9)' }}>
-                <Icons.Sparkles size={14} className="text-white" />
-              </div>
-            </div>
-          </div>
-
-          {/* Hero text */}
-          <h1 className="font-display font-black text-3xl text-white text-center leading-tight mb-2 mt-4"
-            style={{ fontWeight: 900 }}>
-            Tu <span className="shimmer-text">stylist AI</span><br />personal
-          </h1>
-          <p className="text-white/45 text-center text-sm leading-relaxed mb-8 max-w-xs">
-            Sube la foto de una prenda y descubre<br />
-            <span className="text-white/65">3 outfits completos</span> para combinarla al instante
-          </p>
-
-          {/* Main CTA */}
-          <div
-            onClick={triggerInput}
-            onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
-            onDragLeave={() => setDragging(false)}
-            onDrop={(e) => { e.preventDefault(); setDragging(false); onFileSelect(e.dataTransfer.files[0]); }}
-            className="w-full cursor-pointer rounded-3xl p-8 flex flex-col items-center gap-3 transition-all duration-300 mb-6"
-            style={{
-              background: dragging
-                ? 'rgba(79,142,247,0.12)'
-                : 'linear-gradient(145deg, rgba(79,142,247,0.06), rgba(168,85,247,0.06))',
-              border: `2px dashed ${dragging ? '#4f8ef7' : 'rgba(79,142,247,0.25)'}`,
-              boxShadow: dragging ? '0 0 30px rgba(79,142,247,0.2)' : 'none',
-            }}>
-            <div className="w-16 h-16 rounded-2xl flex items-center justify-center"
-              style={{
-                background: 'linear-gradient(135deg, rgba(79,142,247,0.2), rgba(168,85,247,0.2))',
-                border: '1px solid rgba(79,142,247,0.3)',
-              }}>
-              <Icons.Camera size={28} className="text-blue-300" />
-            </div>
-            <p className="text-white/60 text-sm text-center">
-              Toca para subir foto o arrastrar aquí
-            </p>
-          </div>
-
-          {/* Primary CTA button */}
-          <button
-            onClick={triggerInput}
-            className="btn-glow w-full rounded-2xl py-4 flex items-center justify-center gap-3 text-white font-bold text-base active:scale-95">
-            <Icons.Scan size={20} />
-            Escanear Prenda
-          </button>
-
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*"
-            capture="environment"
-            className="hidden"
-            onChange={(e) => e.target.files?.[0] && onFileSelect(e.target.files[0])}
+      const Icons = {
+        Camera: (p) => (
+          <Icon
+            {...p}
+            d={[
+              "M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z",
+              "M12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z",
+            ]}
           />
+        ),
+        Sparkles: (p) => (
+          <Icon
+            {...p}
+            d={[
+              "M12 3l1.09 3.34L16.5 7.5l-3.41 1.16L12 12l-1.09-3.34L7.5 7.5l3.41-1.16L12 3z",
+              "M5 17l.55 1.7L7.25 19.5l-1.7.55L5 21.75l-.55-1.7L2.75 19.5l1.7-.55L5 17z",
+              "M19 3l.55 1.7L21.25 5.5l-1.7.55L19 7.75l-.55-1.7L16.75 5.5l1.7-.55L19 3z",
+            ]}
+          />
+        ),
+        Sneaker: (p) => (
+          <Icon
+            {...p}
+            d="M4 16l1-4h14l1 4H4zM3 16h18v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-2zM8 12V9m4 3V8m4 4v-3"
+          />
+        ),
+        Briefcase: (p) => (
+          <Icon
+            {...p}
+            d={[
+              "M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z",
+              "M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2",
+            ]}
+          />
+        ),
+        Moon: (p) => (
+          <Icon {...p} d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        ),
+        ArrowLeft: (p) => <Icon {...p} d="M19 12H5M5 12l7 7M5 12l7-7" />,
+        Star: (p) => (
+          <Icon
+            {...p}
+            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+            fill="currentColor"
+            stroke="none"
+          />
+        ),
+        Scan: (p) => (
+          <Icon
+            {...p}
+            d={[
+              "M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2",
+              "M8 12h8M12 8v8",
+            ]}
+          />
+        ),
+        Shirt: (p) => (
+          <Icon
+            {...p}
+            d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"
+          />
+        ),
+        ChevronRight: (p) => <Icon {...p} d="M9 18l6-6-6-6" />,
+        Refresh: (p) => (
+          <Icon
+            {...p}
+            d={[
+              "M1 4v6h6",
+              "M23 20v-6h-6",
+              "M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15",
+            ]}
+          />
+        ),
+      };
 
-          {/* Features row */}
-          <div className="w-full mt-8 grid grid-cols-3 gap-3">
-            {[
-              { icon: 'Camera', label: 'Foto en vivo', sub: 'o galería' },
-              { icon: 'Sparkles', label: 'Análisis IA', sub: 'instantáneo' },
-              { icon: 'Shirt', label: '3 Outfits', sub: 'personalizados' },
-            ].map(({ icon, label, sub }) => {
-              const IC = Icons[icon];
-              return (
-                <div key={label} className="rounded-2xl p-3 text-center"
-                  style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                  <IC size={18} className="text-purple-400 mx-auto mb-1.5" />
-                  <p className="text-white text-xs font-semibold leading-tight">{label}</p>
-                  <p className="text-white/35 text-xs leading-tight">{sub}</p>
+      /* ─── Stars Background ─────────────────────────────── */
+      const StarsBackground = () => {
+        const stars = Array.from({ length: 60 }, (_, i) => ({
+          id: i,
+          top: `${Math.random() * 100}%`,
+          left: `${Math.random() * 100}%`,
+          duration: `${2 + Math.random() * 4}s`,
+          delay: `${Math.random() * 4}s`,
+          size: Math.random() > 0.8 ? 3 : 2,
+          opacity: 0.3 + Math.random() * 0.7,
+        }));
+        return (
+          <div className="stars-bg">
+            {stars.map((s) => (
+              <div
+                key={s.id}
+                className="star"
+                style={{
+                  top: s.top,
+                  left: s.left,
+                  width: s.size,
+                  height: s.size,
+                  "--duration": s.duration,
+                  "--delay": s.delay,
+                  opacity: s.opacity,
+                }}
+              />
+            ))}
+          </div>
+        );
+      };
+
+      /* ─── Header ───────────────────────────────────────── */
+      const Header = ({ onReset, showBack }) => (
+        <header className="relative z-10 flex items-center justify-between px-5 py-4 border-b border-white/5">
+          {showBack ? (
+            <button
+              onClick={onReset}
+              className="flex items-center gap-1.5 text-sm text-white/50 hover:text-white transition-colors active:scale-95"
+            >
+              <Icons.ArrowLeft size={16} />
+              <span>Inicio</span>
+            </button>
+          ) : (
+            <div className="w-16" />
+          )}
+
+          <div className="flex items-center gap-2">
+            <div
+              className="w-7 h-7 rounded-lg flex items-center justify-center"
+              style={{
+                background: "linear-gradient(135deg, #4f8ef7, #a855f7)",
+              }}
+            >
+              <Icons.Star size={14} className="text-white" />
+            </div>
+            <span
+              className="font-display font-700 text-lg tracking-tight text-white neon-text"
+              style={{ fontWeight: 700 }}
+            >
+              AstroLook
+            </span>
+          </div>
+
+          <div className="w-16 flex justify-end">
+            <div className="tag-gradient rounded-full px-2 py-0.5 text-xs text-blue-300 font-medium">
+              AI ✦
+            </div>
+          </div>
+        </header>
+      );
+
+      /* ─── Outfit Data ──────────────────────────────────── */
+      const outfits = [
+        {
+          id: 1,
+          title: "Look Casual",
+          tag: "Everyday",
+          description:
+            "Combina ideal con unos jeans rectos oscuros y zapatillas blancas clásicas. Un conjunto fresco y versátil para el día a día.",
+          icon: "Sneaker",
+          color: { from: "#4f8ef7", to: "#38bdf8" },
+          glow: "rgba(79,142,247,0.35)",
+          accent: "text-blue-400",
+          border: "rgba(79,142,247,0.3)",
+          tagBg: "rgba(79,142,247,0.12)",
+          tagColor: "#93c5fd",
+          items: [
+            "Jeans rectos oscuros",
+            "Zapatillas blancas",
+            "Cinturón negro",
+          ],
+        },
+        {
+          id: 2,
+          title: "Look Formal",
+          tag: "Professional",
+          description:
+            "Dale un toque elegante con un pantalón chino beige y botines de cuero marrón. Sofisticación con clase.",
+          icon: "Briefcase",
+          color: { from: "#a855f7", to: "#c084fc" },
+          glow: "rgba(168,85,247,0.35)",
+          accent: "text-purple-400",
+          border: "rgba(168,85,247,0.3)",
+          tagBg: "rgba(168,85,247,0.12)",
+          tagColor: "#c4b5fd",
+          items: ["Pantalón chino beige", "Botines marrón", "Reloj clásico"],
+        },
+        {
+          id: 3,
+          title: "Look Noche",
+          tag: "Night Out",
+          description:
+            "Atrévete con un pantalón negro ajustado y una chaqueta de cuero sintético. Estilo oscuro y magnético.",
+          icon: "Moon",
+          color: { from: "#e879f9", to: "#a855f7" },
+          glow: "rgba(232,121,249,0.35)",
+          accent: "text-pink-400",
+          border: "rgba(232,121,249,0.3)",
+          tagBg: "rgba(232,121,249,0.12)",
+          tagColor: "#f0abfc",
+          items: [
+            "Pantalón negro ajustado",
+            "Chaqueta cuero sintético",
+            "Chelsea boots",
+          ],
+        },
+      ];
+
+      /* ─── Outfit Card ──────────────────────────────────── */
+      const OutfitCard = ({ outfit, index }) => {
+        const [pressed, setPressed] = useState(false);
+        const IconComp = Icons[outfit.icon] || Icons.Shirt;
+        const delayClass =
+          ["card-delay-1", "card-delay-2", "card-delay-3"][index] || "";
+        return (
+          <div
+            className={`card-border rounded-2xl p-5 animate-card-in ${delayClass}`}
+            style={{
+              borderRadius: "16px",
+              boxShadow: `0 4px 30px ${outfit.glow}`,
+            }}
+          >
+            {/* Card top row */}
+            <div className="flex items-start justify-between mb-3">
+              <div>
+                <span
+                  className="text-xs font-semibold rounded-full px-2.5 py-1 inline-block mb-2"
+                  style={{ background: outfit.tagBg, color: outfit.tagColor }}
+                >
+                  {outfit.tag}
+                </span>
+                <h3
+                  className="font-display font-bold text-xl text-white"
+                  style={{ fontWeight: 700 }}
+                >
+                  {outfit.title}
+                </h3>
+              </div>
+              <div
+                className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ml-3"
+                style={{
+                  background: `linear-gradient(135deg, ${outfit.color.from}22, ${outfit.color.to}22)`,
+                  border: `1px solid ${outfit.border}`,
+                }}
+              >
+                <IconComp size={22} className={outfit.accent} />
+              </div>
+            </div>
+
+            {/* Description */}
+            <p className="text-sm text-white/60 leading-relaxed mb-4">
+              {outfit.description}
+            </p>
+
+            {/* Items list */}
+            <div className="space-y-1.5 mb-5">
+              {outfit.items.map((item, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <div
+                    className="w-1 h-1 rounded-full flex-shrink-0"
+                    style={{ background: outfit.color.from }}
+                  />
+                  <span className="text-xs text-white/50">{item}</span>
                 </div>
-              );
-            })}
+              ))}
+            </div>
+
+            {/* Divider */}
+            <div
+              className="h-px w-full mb-4"
+              style={{
+                background: `linear-gradient(90deg, ${outfit.border}, transparent)`,
+              }}
+            />
+
+            {/* CTA button */}
+            <button
+              onMouseDown={() => setPressed(true)}
+              onMouseUp={() => setPressed(false)}
+              onTouchStart={() => setPressed(true)}
+              onTouchEnd={() => setPressed(false)}
+              className="w-full flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-semibold transition-all duration-200"
+              style={{
+                background: pressed
+                  ? `linear-gradient(135deg, ${outfit.color.from}33, ${outfit.color.to}33)`
+                  : `linear-gradient(135deg, ${outfit.color.from}18, ${outfit.color.to}18)`,
+                border: `1px solid ${outfit.border}`,
+                color: outfit.tagColor,
+                transform: pressed ? "scale(0.97)" : "scale(1)",
+              }}
+            >
+              <Icons.ChevronRight size={15} />
+              Ver prendas similares
+            </button>
           </div>
+        );
+      };
+
+      /* ─── Loading Screen ───────────────────────────────── */
+      const LoadingScreen = ({ imageUrl }) => {
+        const steps = [
+          "Detectando tipo de prenda...",
+          "Analizando colores y textura...",
+          "Generando combinaciones de outfits...",
+        ];
+        const [step, setStep] = useState(0);
+
+        useEffect(() => {
+          const t1 = setTimeout(() => setStep(1), 1000);
+          const t2 = setTimeout(() => setStep(2), 2000);
+          return () => {
+            clearTimeout(t1);
+            clearTimeout(t2);
+          };
+        }, []);
+
+        return (
+          <div className="flex flex-col items-center px-6 py-8 animate-fade-in">
+            {/* Image preview */}
+            <div className="relative mb-8">
+              <div
+                className="w-28 h-28 rounded-2xl overflow-hidden"
+                style={{
+                  border: "2px solid rgba(79,142,247,0.4)",
+                  boxShadow:
+                    "0 0 30px rgba(79,142,247,0.3), 0 0 60px rgba(168,85,247,0.2)",
+                }}
+              >
+                <img
+                  src={imageUrl}
+                  alt="Prenda"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              {/* Scan overlay animation */}
+              <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
+                <div
+                  className="absolute inset-x-0 h-0.5 animate-bounce"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, transparent, #4f8ef7, transparent)",
+                    top: "40%",
+                  }}
+                />
+              </div>
+              {/* Corner decorators */}
+              {[
+                ["top-0 left-0", "border-t-2 border-l-2"],
+                ["top-0 right-0", "border-t-2 border-r-2"],
+                ["bottom-0 left-0", "border-b-2 border-l-2"],
+                ["bottom-0 right-0", "border-b-2 border-r-2"],
+              ].map(([pos, borders], i) => (
+                <div
+                  key={i}
+                  className={`absolute w-3 h-3 ${pos} ${borders} rounded-sm`}
+                  style={{ borderColor: "#4f8ef7" }}
+                />
+              ))}
+            </div>
+
+            {/* Spinner */}
+            <div className="relative flex items-center justify-center mb-6">
+              <div className="spinner-ring" />
+              <div
+                className="absolute w-10 h-10 rounded-full"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(79,142,247,0.2), rgba(168,85,247,0.2))",
+                  border: "1px solid rgba(79,142,247,0.3)",
+                }}
+              >
+                <div className="w-full h-full flex items-center justify-center">
+                  <Icons.Sparkles size={18} className="text-blue-400" />
+                </div>
+              </div>
+            </div>
+
+            {/* Title */}
+            <h2
+              className="font-display font-bold text-xl text-white text-center mb-2"
+              style={{ fontWeight: 700 }}
+            >
+              Analizando tu prenda
+            </h2>
+            <p className="text-sm text-white/40 text-center mb-8">
+              La IA está creando tus outfits personalizados
+            </p>
+
+            {/* Steps */}
+            <div className="w-full space-y-3 mb-8">
+              {steps.map((s, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-3 transition-all duration-500"
+                  style={{ opacity: i <= step ? 1 : 0.25 }}
+                >
+                  <div
+                    className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{
+                      background:
+                        i < step
+                          ? "linear-gradient(135deg, #4f8ef7, #a855f7)"
+                          : i === step
+                            ? "rgba(79,142,247,0.2)"
+                            : "rgba(255,255,255,0.05)",
+                      border:
+                        i === step ? "1px solid rgba(79,142,247,0.5)" : "none",
+                      transition: "all 0.5s ease",
+                    }}
+                  >
+                    {i < step ? (
+                      <svg
+                        width="10"
+                        height="10"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="white"
+                        strokeWidth="3"
+                      >
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    ) : i === step ? (
+                      <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+                    ) : (
+                      <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
+                    )}
+                  </div>
+                  <span
+                    className="text-sm"
+                    style={{
+                      color: i <= step ? "#e2e8f0" : "rgba(255,255,255,0.25)",
+                    }}
+                  >
+                    {s}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* Progress bar */}
+            <div
+              className="w-full h-1 rounded-full overflow-hidden"
+              style={{ background: "rgba(255,255,255,0.06)" }}
+            >
+              <div
+                className="h-full rounded-full progress-fill"
+                style={{
+                  background:
+                    "linear-gradient(90deg, #4f8ef7, #a855f7, #e879f9)",
+                }}
+              />
+            </div>
+          </div>
+        );
+      };
+
+      /* ─── Results Screen ───────────────────────────────── */
+      const ResultsScreen = ({ imageUrl, onReset }) => (
+        <div className="animate-fade-in px-4 pb-10">
+          {/* Preview strip */}
+          <div
+            className="flex items-center gap-3 mx-1 mb-6 p-3 rounded-2xl"
+            style={{
+              background: "rgba(255,255,255,0.04)",
+              border: "1px solid rgba(255,255,255,0.06)",
+            }}
+          >
+            <img
+              src={imageUrl}
+              alt="Prenda analizada"
+              className="w-14 h-14 rounded-xl object-cover flex-shrink-0"
+              style={{ border: "1px solid rgba(79,142,247,0.3)" }}
+            />
+            <div>
+              <p className="text-xs text-white/40 mb-0.5">Prenda analizada</p>
+              <div className="flex items-center gap-1.5">
+                <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                <p className="text-sm font-semibold text-white">
+                  3 outfits generados
+                </p>
+              </div>
+            </div>
+            <div className="ml-auto tag-gradient rounded-xl px-2.5 py-1.5 text-center">
+              <p className="text-xs font-bold shimmer-text">AI</p>
+            </div>
+          </div>
+
+          {/* Section title */}
+          <div className="flex items-center gap-2 mb-5 px-1">
+            <Icons.Sparkles size={16} className="text-purple-400" />
+            <h2
+              className="font-display font-bold text-lg text-white"
+              style={{ fontWeight: 700 }}
+            >
+              Tus outfits personalizados
+            </h2>
+          </div>
+
+          {/* Cards */}
+          <div className="space-y-4 mb-8">
+            {outfits.map((outfit, i) => (
+              <OutfitCard key={outfit.id} outfit={outfit} index={i} />
+            ))}
+          </div>
+
+          {/* Reset button */}
+          <button
+            onClick={onReset}
+            className="w-full flex items-center justify-center gap-2 rounded-2xl py-4 text-sm font-semibold transition-all duration-200 active:scale-95"
+            style={{
+              background: "rgba(255,255,255,0.05)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              color: "rgba(255,255,255,0.7)",
+            }}
+          >
+            <Icons.Refresh size={16} />
+            Escanear otra prenda
+          </button>
         </div>
       );
-    };
 
-    /* ─── Main App ─────────────────────────────────────── */
-    const App = () => {
-      const [screen, setScreen] = useState('home');   // 'home' | 'loading' | 'results'
-      const [imageUrl, setImageUrl] = useState(null);
+      /* ─── Home Screen ──────────────────────────────────── */
+      const HomeScreen = ({ onFileSelect }) => {
+        const fileInputRef = useRef(null);
+        const [dragging, setDragging] = useState(false);
 
-      const handleFileSelect = useCallback((file) => {
-        if (!file) return;
-        const url = URL.createObjectURL(file);
-        setImageUrl(url);
-        setScreen('loading');
-        setTimeout(() => setScreen('results'), 3000);
-      }, []);
+        const triggerInput = () => fileInputRef.current?.click();
 
-      const handleReset = useCallback(() => {
-        if (imageUrl) URL.revokeObjectURL(imageUrl);
-        setImageUrl(null);
-        setScreen('home');
-      }, [imageUrl]);
+        return (
+          <div className="flex flex-col items-center px-6 py-4 animate-fade-in">
+            {/* Hero icon */}
+            <div className="animate-float mb-2 mt-4">
+              <div
+                className="w-24 h-24 rounded-3xl flex items-center justify-center relative"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(79,142,247,0.15), rgba(168,85,247,0.15))",
+                  border: "1px solid rgba(79,142,247,0.25)",
+                  boxShadow: "0 0 40px rgba(79,142,247,0.2)",
+                }}
+              >
+                <Icons.Shirt size={44} className="text-blue-300" />
+                <div
+                  className="absolute -top-2 -right-2 w-7 h-7 rounded-full flex items-center justify-center"
+                  style={{
+                    background: "linear-gradient(135deg, #a855f7, #e879f9)",
+                  }}
+                >
+                  <Icons.Sparkles size={14} className="text-white" />
+                </div>
+              </div>
+            </div>
 
-      return (
-        <div className="min-h-screen font-sans" style={{ background: '#04040f' }}>
-          <StarsBackground />
-          <div className="mesh-bg" />
+            {/* Hero text */}
+            <h1
+              className="font-display font-black text-3xl text-white text-center leading-tight mb-2 mt-4"
+              style={{ fontWeight: 900 }}
+            >
+              Tu <span className="shimmer-text">stylist AI</span>
+              <br />
+              personal
+            </h1>
+            <p className="text-white/45 text-center text-sm leading-relaxed mb-8 max-w-xs">
+              Sube la foto de una prenda y descubre
+              <br />
+              <span className="text-white/65">3 outfits completos</span> para
+              combinarla al instante
+            </p>
 
-          {/* App shell — mobile-first, max-width centered */}
-          <div className="relative z-10 mx-auto flex flex-col min-h-screen"
-            style={{ maxWidth: '430px' }}>
+            {/* Main CTA */}
+            <div
+              onClick={triggerInput}
+              onDragOver={(e) => {
+                e.preventDefault();
+                setDragging(true);
+              }}
+              onDragLeave={() => setDragging(false)}
+              onDrop={(e) => {
+                e.preventDefault();
+                setDragging(false);
+                onFileSelect(e.dataTransfer.files[0]);
+              }}
+              className="w-full cursor-pointer rounded-3xl p-8 flex flex-col items-center gap-3 transition-all duration-300 mb-6"
+              style={{
+                background: dragging
+                  ? "rgba(79,142,247,0.12)"
+                  : "linear-gradient(145deg, rgba(79,142,247,0.06), rgba(168,85,247,0.06))",
+                border: `2px dashed ${dragging ? "#4f8ef7" : "rgba(79,142,247,0.25)"}`,
+                boxShadow: dragging ? "0 0 30px rgba(79,142,247,0.2)" : "none",
+              }}
+            >
+              <div
+                className="w-16 h-16 rounded-2xl flex items-center justify-center"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(79,142,247,0.2), rgba(168,85,247,0.2))",
+                  border: "1px solid rgba(79,142,247,0.3)",
+                }}
+              >
+                <Icons.Camera size={28} className="text-blue-300" />
+              </div>
+              <p className="text-white/60 text-sm text-center">
+                Toca para subir foto o arrastrar aquí
+              </p>
+            </div>
 
-            <Header onReset={handleReset} showBack={screen !== 'home'} />
+            {/* Primary CTA button */}
+            <button
+              onClick={triggerInput}
+              className="btn-glow w-full rounded-2xl py-4 flex items-center justify-center gap-3 text-white font-bold text-base active:scale-95"
+            >
+              <Icons.Scan size={20} />
+              Escanear Prenda
+            </button>
 
-            <main className="flex-1 overflow-y-auto">
-              {screen === 'home' && (
-                <HomeScreen onFileSelect={handleFileSelect} />
-              )}
-              {screen === 'loading' && (
-                <LoadingScreen imageUrl={imageUrl} />
-              )}
-              {screen === 'results' && (
-                <ResultsScreen imageUrl={imageUrl} onReset={handleReset} />
-              )}
-            </main>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              capture="environment"
+              className="hidden"
+              onChange={(e) =>
+                e.target.files?.[0] && onFileSelect(e.target.files[0])
+              }
+            />
 
-            {/* Bottom safe area bar */}
-            <div className="h-6 flex-shrink-0" />
+            {/* Features row */}
+            <div className="w-full mt-8 grid grid-cols-3 gap-3">
+              {[
+                { icon: "Camera", label: "Foto en vivo", sub: "o galería" },
+                { icon: "Sparkles", label: "Análisis IA", sub: "instantáneo" },
+                { icon: "Shirt", label: "3 Outfits", sub: "personalizados" },
+              ].map(({ icon, label, sub }) => {
+                const IC = Icons[icon];
+                return (
+                  <div
+                    key={label}
+                    className="rounded-2xl p-3 text-center"
+                    style={{
+                      background: "rgba(255,255,255,0.03)",
+                      border: "1px solid rgba(255,255,255,0.06)",
+                    }}
+                  >
+                    <IC size={18} className="text-purple-400 mx-auto mb-1.5" />
+                    <p className="text-white text-xs font-semibold leading-tight">
+                      {label}
+                    </p>
+                    <p className="text-white/35 text-xs leading-tight">{sub}</p>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      );
-    };
+        );
+      };
 
-    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-  </script>
-</body>
+      /* ─── Main App ─────────────────────────────────────── */
+      const App = () => {
+        const [screen, setScreen] = useState("home"); // 'home' | 'loading' | 'results'
+        const [imageUrl, setImageUrl] = useState(null);
+
+        const handleFileSelect = useCallback((file) => {
+          if (!file) return;
+          const url = URL.createObjectURL(file);
+          setImageUrl(url);
+          setScreen("loading");
+          setTimeout(() => setScreen("results"), 3000);
+        }, []);
+
+        const handleReset = useCallback(() => {
+          if (imageUrl) URL.revokeObjectURL(imageUrl);
+          setImageUrl(null);
+          setScreen("home");
+        }, [imageUrl]);
+
+        return (
+          <div
+            className="min-h-screen font-sans"
+            style={{ background: "#04040f" }}
+          >
+            <StarsBackground />
+            <div className="mesh-bg" />
+
+            {/* App shell — mobile-first, max-width centered */}
+            <div
+              className="relative z-10 mx-auto flex flex-col min-h-screen"
+              style={{ maxWidth: "430px" }}
+            >
+              <Header onReset={handleReset} showBack={screen !== "home"} />
+
+              <main className="flex-1 overflow-y-auto">
+                {screen === "home" && (
+                  <HomeScreen onFileSelect={handleFileSelect} />
+                )}
+                {screen === "loading" && <LoadingScreen imageUrl={imageUrl} />}
+                {screen === "results" && (
+                  <ResultsScreen imageUrl={imageUrl} onReset={handleReset} />
+                )}
+              </main>
+
+              {/* Bottom safe area bar */}
+              <div className="h-6 flex-shrink-0" />
+            </div>
+          </div>
+        );
+      };
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+  </body>
 </html>
